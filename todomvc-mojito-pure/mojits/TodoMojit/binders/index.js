@@ -17,6 +17,15 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 			this.toggleAll = node.one('#toggle-all');
 
 			this.addHandlers();
+
+			self.mp.invoke('operate', { 'params': { 'body': { 'op': 'default' }}}, function() { });
+
+			setTimeout(function() {
+				self.mp.invoke('operate',  { 'params': { 'body': { 'op': 'get' } }}, function(err, response) {
+					Y.log('get, err => ' + err, 'warn', NAME);
+					Y.log('get, response => ' + response, 'warn', NAME);
+				});
+			}, 1000);
 		},
 
 		addHandlers: function() {

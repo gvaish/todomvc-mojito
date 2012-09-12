@@ -18,7 +18,8 @@ YUI.add('TodoMojit', function(Y, NAME) {
 
 		operate: function(ac) {
 			var op = ac.params.getFromBody('op'),
-				data = ac.params.getFromBody('data');
+				data = ac.params.getFromBody('data'),
+				todo = Y.mojito.models.Todo;
 
 			Y.log('[operate] Op: ' + op + ', Data: ' + data, 'warn', NAME);
 
@@ -27,7 +28,14 @@ YUI.add('TodoMojit', function(Y, NAME) {
 					if(data) {
 						//data = id
 					} else {
-						//get all
+						todo.getAll(function(items) {
+							Y.log('getAll => ' + Y.JSON.stringify(items), 'warn', NAME);
+							if(items) {
+								ac.done(Y.JSON.stringify(items));
+							} else {
+								ac.error('An error occurred');
+							}
+						});
 					}
 					break;
 				case 'add':
@@ -39,10 +47,12 @@ YUI.add('TodoMojit', function(Y, NAME) {
 					break;
 				case 'update':
 					break;
+				default:
+					Y.log('ac.done[default]', 'warn', NAME);
+					ac.done('done');
+					break;
 			}
-			Y.log('ac.done[default]', 'warn', NAME);
-			ac.done('done');
 		}
     };
 
-}, '0.0.1', {requires: ['mojito', 'json', 'mojito-assets-addon', 'mojito-params-addon']});
+}, '0.0.1', {requires: ['mojito', 'TodoMojitModelTodo', 'json', 'mojito-assets-addon', 'mojito-params-addon']});
