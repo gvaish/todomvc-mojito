@@ -18,14 +18,21 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 
 			this.addHandlers();
 
-			self.mp.invoke('operate', { 'params': { 'body': { 'op': 'default' }}}, function() { });
+			//self.mp.invoke('operate', { 'params': { 'body': { 'op': 'noop' }}}, function() {
+				self.resync();
+			//});
+		},
 
-			setTimeout(function() {
-				self.mp.invoke('operate',  { 'params': { 'body': { 'op': 'get' } }}, function(err, response) {
-					Y.log('get, err => ' + err, 'warn', NAME);
-					Y.log('get, response => ' + response, 'warn', NAME);
-				});
-			}, 1000);
+		resync: function() {
+			var self = this;
+			Y.log('resync called...', 'warn', NAME);
+			self.mp.invoke('operate',  { 'params': { 'body': { 'op': 'get' } }}, function(err, response) {
+				//Y.log('get, err => ' + err, 'warn', NAME);
+				Y.log('get, response => response-size: ' + response.length, 'warn', NAME);
+				if(!err) {
+					self.listNode.append(response);
+				}
+			});
 		},
 
 		addHandlers: function() {
@@ -33,7 +40,7 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 				self = this;
 
 			this.inputNode.on('keypress', function(e) {
-				self.enterCreate(e);
+				self.addItem(e);
 			});
 
 			this.toggleAll.on('click', function(e) {
@@ -51,16 +58,34 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 			}, 'div.view > label');
 
 			node.delegate('click', function(e) {
-				//delete
+				self.deleteItem(e);
 			}, '.destroy');
 
 			node.delegate('click', function(e) {
-				//complete <=> !complete
+				self.toggleItem(e);
 			}, '.toggle');
 		},
 
 		updateUI: function() {
 			//
+		},
+
+		toggleItem: function(e) {
+			var cbox = e.currentTarget,
+				complete = cbox.get('checked'),
+				li = cbox.ancestor('li'),
+				id = li.get('id'),
+				self = this;
+
+			this.mp.invoke('operate', { 'params': {
+				'body': { 'op': 'toggle', 'data': id }
+			}}, function(err, response) {
+				if(err) {
+					alert('Error: ' + err);
+				} else {
+					li[complete ? 'addClass' : 'removeClass']('completed');
+				}
+			});
 		},
 
 		startEdit: function(e) {
@@ -83,12 +108,29 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 			if(e.keyCode === 27) {
 				input.set("value", oldValue);
 			} else {
-				//TODO: update the model on server as well
+				//this.addItem(e);
 				lbl.setHTML(value);
 			}
 		},
 
-		enterCreate: function(e) {
+		deleteItem: function(e) {
+			var btn = e.target,
+				li = btn.ancestor('li'),
+				itemId = li.get('id');
+
+			//Y.log('Delete: ' + itemId, 'warn', NAME);
+			this.mp.invoke('operate', { 'params':
+				{ 'body': { 'op': 'delete', 'data': itemId }}
+			}, function(err, response) {
+				if(err) {
+					alert('Error while deleting: ' + err);
+				} else {
+					li.get('parentNode').removeChild(li);
+				}
+			});
+		},
+
+		addItem: function(e) {
 			var value = Y.Escape.html(Y.Lang.trim(this.inputNode.get('value'))),
 				self  = this;
 
@@ -107,8 +149,11 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 				if(err) {
 					alert('Error occurred: ' + err);
 				} else {
-					self.addTodoItem(response);
+					//self.addTodoItem(response);
+					//alert('Response: ' + response);
+					//self.listNode.set('inner')
 					self.inputNode.set('value', '');
+					self.resync();
 				}
 			});
 		},
