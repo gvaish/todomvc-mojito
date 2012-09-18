@@ -21,7 +21,7 @@ YUI.add('TodoMojit', function(Y, NAME) {
 				data = ac.params.getFromBody('data'),
 				todo = Y.mojito.models.Todo;
 
-			Y.log('[operate] Op: ' + op + ', Data: ' + data, 'warn', NAME);
+			//Y.log('[operate] Op: ' + op + ', Data: ' + data, 'warn', NAME);
 
 			switch(op) {
 				case 'get':
@@ -69,7 +69,6 @@ YUI.add('TodoMojit', function(Y, NAME) {
 					break;
 				case 'add':
 					data = Y.JSON.parse(data);
-					Y.log('operate/add', 'warn', NAME);
 					todo.add(data, function(err, items) {
 						if(err) {
 							ac.error(err);

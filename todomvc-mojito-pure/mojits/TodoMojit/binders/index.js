@@ -18,18 +18,15 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 
 			this.addHandlers();
 
-			//self.mp.invoke('operate', { 'params': { 'body': { 'op': 'noop' }}}, function() {
-				self.resync();
-			//});
+			self.resync();
 		},
 
 		resync: function() {
 			var self = this;
-			Y.log('resync called...', 'warn', NAME);
+			Y.log('resync called', 'warn', NAME);
 			self.mp.invoke('operate',  { 'params': { 'body': { 'op': 'get' } }}, function(err, response) {
-				//Y.log('get, err => ' + err, 'warn', NAME);
-				Y.log('get, response => response-size: ' + response.length, 'warn', NAME);
 				if(!err) {
+					self.listNode.set('innerHTML', '');
 					self.listNode.append(response);
 				}
 			});
@@ -83,7 +80,8 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 				if(err) {
 					alert('Error: ' + err);
 				} else {
-					li[complete ? 'addClass' : 'removeClass']('completed');
+					//li[complete ? 'addClass' : 'removeClass']('completed');
+					self.resync();
 				}
 			});
 		},
@@ -102,30 +100,40 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 				li = input.ancestor('li'),
 				lbl = li.one('label'),
 				value = Y.Escape.html(Y.Lang.trim(input.get("value"))),
-				oldValue = lbl.getHTML();
+				oldValue = lbl.getHTML(),
+				id = li.get('id');
 
 			li.removeClass('editing');
 			if(e.keyCode === 27) {
 				input.set("value", oldValue);
 			} else {
-				//this.addItem(e);
+				self.updateItem(id, value);
 				lbl.setHTML(value);
 			}
+		},
+
+		editItem: function(e) {
+			this.mp.invoke('operate', {
+				'params': { 'body': { 'op': 'update', 'data': '' }}
+			}, function(err, response) {
+				//
+			});
 		},
 
 		deleteItem: function(e) {
 			var btn = e.target,
 				li = btn.ancestor('li'),
-				itemId = li.get('id');
+				itemId = li.get('id'),
+				self = this;
 
-			//Y.log('Delete: ' + itemId, 'warn', NAME);
 			this.mp.invoke('operate', { 'params':
 				{ 'body': { 'op': 'delete', 'data': itemId }}
 			}, function(err, response) {
 				if(err) {
 					alert('Error while deleting: ' + err);
 				} else {
-					li.get('parentNode').removeChild(li);
+					//li.get('parentNode').removeChild(li);
+					self.resync();
 				}
 			});
 		},
@@ -149,9 +157,6 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 				if(err) {
 					alert('Error occurred: ' + err);
 				} else {
-					//self.addTodoItem(response);
-					//alert('Response: ' + response);
-					//self.listNode.set('inner')
 					self.inputNode.set('value', '');
 					self.resync();
 				}
