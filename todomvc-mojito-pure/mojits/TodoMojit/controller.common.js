@@ -10,7 +10,6 @@ YUI.add('TodoMojit', function(Y, NAME) {
 
 		index: function(ac) {
 			ac.assets.addBlob('<meta charset="utf-8">\n<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">', 'top');
-			//ac.assets.addCss('/static/' + ac.type + '/assets/base.css', 'top');
 			ac.assets.addBlob('<link href="/static/' + ac.type + '/assets/base.css" rel="stylesheet" type="text/css" />', 'top');
 			ac.assets.addBlob('<!--[if IE]>\n<script src="/static/' + ac.type + '/assets/ie.js"></script>\n<![endif]-->', 'top');
 			ac.done({});
@@ -21,24 +20,14 @@ YUI.add('TodoMojit', function(Y, NAME) {
 				data = ac.params.getFromBody('data'),
 				todo = Y.mojito.models.Todo;
 
-			//Y.log('[operate] Op: ' + op + ', Data: ' + data, 'warn', NAME);
-
 			switch(op) {
 				case 'get':
 					if(data) {
 						data = String(data);
 						switch(data) {
 							case 'completed':
-								todo.getFiltered(true, function(err, items) {
-									if(err) {
-										ac.error(err);
-									} else {
-										ac.done({ "items": items.reverse(), "count": items.length }, 'items');
-									}
-								});
-								break;
 							case 'incomplete':
-								todo.getFiltered(false, function(err, items) {
+								todo.getFiltered((data == 'completed'), function(err, items) {
 									if(err) {
 										ac.error(err);
 									} else {
@@ -100,7 +89,6 @@ YUI.add('TodoMojit', function(Y, NAME) {
 					if(data) {
 						switch(data) {
 							case 'completed':
-								//TODO
 								break;
 						}
 					} else {
@@ -122,11 +110,18 @@ YUI.add('TodoMojit', function(Y, NAME) {
 						}
 					});
 					break;
-				case 'all':
-					//TODO
+				case 'batchMark':
+					data = Y.JSON.parse(data);
+					todo.batchMark(!!data, function(err, response) {
+						if(err) {
+							ac.error(err);
+						} else {
+							ac.done('successful');
+						}
+					});
 					break;
 				default:
-					Y.log('ac.done[default/no-op]', 'warn', NAME);
+					Y.log('ac.done[default/no-op]', 'error', NAME);
 					ac.done('noop');
 					break;
 			}

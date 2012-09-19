@@ -27,7 +27,9 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 			self.mp.invoke('operate',  { 'params': { 'body': { 'op': 'get' } }}, function(err, response) {
 				if(!err) {
 					self.listNode.set('innerHTML', '');
-					self.listNode.append(response);
+					if(response) {
+						self.listNode.append(response);
+					}
 				}
 			});
 		},
@@ -42,6 +44,7 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 
 			this.toggleAll.on('click', function(e) {
 				//mark all completed <=> not completed
+				self.batchMark();
 			});
 
 			node.delegate(['keypress', 'change', 'blur'], function(e) {
@@ -63,8 +66,26 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 			}, '.toggle');
 		},
 
-		updateUI: function() {
-			//
+		batchMark: function() {
+			var allCompleted = this.toggleAll.get('checked'),
+				self = this;
+
+			this.listNode.all('li').each(function(liNode) {
+				liNode[allCompleted ? 'addClass' : 'removeClass']('completed');
+				liNode.one('.toggle').set('checked', allCompleted);
+			});
+
+			this.mp.invoke('operate', {
+				'params': {
+					'body': { 'op': 'batchMark', 'data': allCompleted }
+				}
+			}, function(err, response) {
+				if(err) {
+					alert('Error updating: ' + err);
+				} else {
+					self.resync();
+				}
+			});
 		},
 
 		toggleItem: function(e) {
@@ -101,22 +122,30 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 				lbl = li.one('label'),
 				value = Y.Escape.html(Y.Lang.trim(input.get("value"))),
 				oldValue = lbl.getHTML(),
-				id = li.get('id');
+				id = li.get('id'),
+				completed = li.one('.toggle').get('checked'),
+				self = this;
 
 			li.removeClass('editing');
 			if(e.keyCode === 27) {
 				input.set("value", oldValue);
 			} else {
-				self.updateItem(id, value);
+				self.updateItem(id, value, completed);
 				lbl.setHTML(value);
 			}
 		},
 
-		editItem: function(e) {
+		updateItem: function(id, value, completed) {
+			var self = this,
+				itemObj = { "id": id, "title": value, "completed": completed };
 			this.mp.invoke('operate', {
-				'params': { 'body': { 'op': 'update', 'data': '' }}
+				'params': { 'body': { 'op': 'update', 'data': Y.JSON.stringify(itemObj) }}
 			}, function(err, response) {
-				//
+				if(err) {
+					alert('Error while updating: ' + err);
+				} else {
+					self.resync();
+				}
 			});
 		},
 
@@ -161,13 +190,6 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 					self.resync();
 				}
 			});
-		},
-
-		addTodoItem: function(html) {
-			var self = this,
-				toAdd = Y.Node.create('<li>' + html + '</li>');
-
-			this.listNode.prepend(toAdd);
 		}
 	};
 

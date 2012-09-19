@@ -89,6 +89,20 @@ YUI.add('TodoMojitModelTodo', function(Y, NAME) {
 			}
 		},
 
+		batchMark: function(completed, callback) {
+			if(storage) {
+				var all = storage.retrieve('todo').response;
+
+				Y.each(all, function(item) {
+					item.completed = !!completed;
+				});
+				storage.add('todo', all);
+				callback(null, 'updated');
+			} else {
+				callback('Storage not initialized');
+			}
+		},
+
 		toggle: function(id, callback) {
 			if(!id) {
 				callback('Missing id to retrieve');
