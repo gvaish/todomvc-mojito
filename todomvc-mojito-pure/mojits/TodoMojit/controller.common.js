@@ -77,13 +77,23 @@ YUI.add('TodoMojit', function(Y, NAME) {
 					break;
 				case 'update':
 					data = Y.JSON.parse(data);
-					todo.update(data, function(err, item) {
-						if(err) {
-							ac.error(err);
-						} else {
-							ac.done(item, 'item');
-						}
-					});
+					if(!data.title) {
+						todo.remove(data.id, function(err, item) {
+							if(err) {
+								ac.error(err);
+							} else {
+								ac.done('success');
+							}
+						});
+					} else {
+						todo.update(data, function(err, item) {
+							if(err) {
+								ac.error(err);
+							} else {
+								ac.done(item, 'item');
+							}
+						});
+					}
 					break;
 				case 'clear':
 					if(data) {

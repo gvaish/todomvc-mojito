@@ -15,6 +15,7 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 			this.inputNode = node.one('#new-todo');
 			this.listNode = node.one('#todo-list');
 			this.toggleAll = node.one('#toggle-all');
+			this.main = node.one('#main');
 
 			this.addHandlers();
 
@@ -50,6 +51,7 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 				}
 			}
 			this.toggleAll.set('checked', size > 0 ? allSel : false);
+			this.main[size > 0 ? 'show': 'hide']();
 		},
 
 		addHandlers: function() {
