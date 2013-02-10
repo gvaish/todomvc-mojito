@@ -2,3 +2,5 @@ node_modules
 /todomvc-mojito-pure/autoload/*.js
 artifacts
 .DS_Store
+.*.swp
+*~

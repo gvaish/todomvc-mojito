@@ -29,9 +29,26 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 					self.listNode.set('innerHTML', '');
 					if(response) {
 						self.listNode.append(response);
+						self._resyncUI();
 					}
 				}
 			});
+		},
+
+		_resyncUI: function() {
+			var n = this.node,
+				toggles = n.all('.toggle'),
+				size = toggles.size(),
+				allSel = true,
+				i;
+
+			for(i = 0; i < size; i++) {
+				if(!toggles.item(i).get('checked')) {
+					allSel = false;
+					break;
+				}
+			}
+			this.toggleAll.set('checked', allSel);
 		},
 
 		addHandlers: function() {
