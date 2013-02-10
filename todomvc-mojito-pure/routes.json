@@ -1,8 +1,0 @@
-[{
-    "settings": [ "master" ],
-	"root": {
-		"path": "/",
-		"verbs": [ "get" ],
-		"call": "main_ui.index"
-	}
-}]
