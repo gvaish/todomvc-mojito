@@ -23,14 +23,14 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 
 		resync: function() {
 			var self = this;
-			Y.log('resync called', 'warn', NAME);
+			//Y.log('resync called', 'warn', NAME);
 			self.mp.invoke('operate',  { 'params': { 'body': { 'op': 'get' } }}, function(err, response) {
 				if(!err) {
 					self.listNode.set('innerHTML', '');
 					if(response) {
 						self.listNode.append(response);
-						self._resyncUI();
 					}
+					self._resyncUI();
 				}
 			});
 		},
@@ -42,13 +42,14 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 				allSel = true,
 				i;
 
+			//Y.log('Size: ' + size, 'warn', NAME);
 			for(i = 0; i < size; i++) {
 				if(!toggles.item(i).get('checked')) {
 					allSel = false;
 					break;
 				}
 			}
-			this.toggleAll.set('checked', allSel);
+			this.toggleAll.set('checked', size > 0 ? allSel : false);
 		},
 
 		addHandlers: function() {
