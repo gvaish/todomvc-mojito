@@ -18,7 +18,7 @@ YUI.add('TodoMojit', function(Y, NAME) {
 		operate: function(ac) {
 			var op = ac.params.getFromBody('op'),
 				data = ac.params.getFromBody('data'),
-				todo = Y.mojito.models.Todo;
+				todo = ac.models.get('Todo');//Y.mojito.models.Todo;
 
 			switch(op) {
 				case 'get':
@@ -138,4 +138,4 @@ YUI.add('TodoMojit', function(Y, NAME) {
 		}
 	};
 
-}, '0.0.1', {requires: ['mojito', 'TodoMojitModelTodo', 'json', 'mojito-assets-addon', 'mojito-params-addon']});
+}, '0.0.1', {requires: ['mojito', 'TodoMojitModelTodo', 'mojito-models-addon', 'json', 'mojito-assets-addon', 'mojito-params-addon']});

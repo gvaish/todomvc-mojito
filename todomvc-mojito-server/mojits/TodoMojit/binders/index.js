@@ -213,4 +213,4 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 		}
 	};
 
-}, '0.0.1', {requires: ['mojito-client', 'node', 'json' ]});
+}, '0.0.1', {requires: ['mojito-client', 'escape', 'node', 'json' ]});
