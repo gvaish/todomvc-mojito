@@ -3,8 +3,9 @@ YUI.add('TodoMojitModelTodo', function(Y, NAME) {
 	// Finally, got official localStorage: http://yuilibrary.com/yui/docs/api/classes/CacheOffline.html. Huh!
 	var storage = new Y.CacheOffline();
 
-	Y.mojito.models.Todo = {
+	Y.namespace('mojito.models').Todo = {
 		init: function(config) {
+			Y.log('Initializing... ', 'warn', NAME);
 			this.config = config;
 
 			var initData = storage.retrieve('todo');

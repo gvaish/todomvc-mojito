@@ -4,10 +4,6 @@ YUI.add('TodoMojit', function(Y, NAME) {
 
 	Y.namespace('mojito.controllers')[NAME] = {
 
-		init: function(config) {
-			this.config = config;
-		},
-
 		index: function(ac) {
 			ac.assets.addBlob('<meta charset="utf-8">\n<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">', 'top');
 			ac.assets.addBlob('<link href="/static/' + ac.type + '/assets/base.css" rel="stylesheet" type="text/css" />', 'top');
@@ -18,8 +14,9 @@ YUI.add('TodoMojit', function(Y, NAME) {
 		operate: function(ac) {
 			var op = ac.params.getFromBody('op'),
 				data = ac.params.getFromBody('data'),
-				todo = Y.mojito.models.Todo;
+				todo = ac.models.get('Todo');
 
+			Y.log('operate called: op = ' + op + ', todo: ' + todo);
 			switch(op) {
 				case 'get':
 					if(data) {
@@ -138,4 +135,4 @@ YUI.add('TodoMojit', function(Y, NAME) {
 		}
 	};
 
-}, '0.0.1', {requires: ['mojito', 'TodoMojitModelTodo', 'json', 'mojito-assets-addon', 'mojito-params-addon']});
+}, '0.0.1', {requires: ['mojito', 'TodoMojitModelTodo', 'mojito-models-addon',  'json', 'mojito-assets-addon', 'mojito-params-addon']});
