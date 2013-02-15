@@ -33,7 +33,7 @@
 		},
 		"builds": {
 			"html5app": {
-				"forceRelativePaths": false,
+				"forceRelativePaths": true,
 				"attachManifest": true
 			}
 		}
