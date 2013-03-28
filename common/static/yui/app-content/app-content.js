@@ -1,9 +1,4 @@
-/*
-YUI 3.7.3 (build 5687)
-Copyright 2012 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
+/* YUI 3.8.1 (build 5795) Copyright 2013 Yahoo! Inc. http://yuilibrary.com/license/ */
 YUI.add('app-content', function (Y, NAME) {
 
 /**
@@ -227,7 +222,8 @@ AppContent.prototype = {
 };
 
 // Mix statics.
-Y.mix(AppContent, PjaxContent);
+AppContent.ATTRS = Y.Attribute.protectAttrs(PjaxContent.ATTRS);
+
 // Mix prototype.
 Y.mix(AppContent, PjaxContent, false, null, 1);
 
@@ -236,4 +232,4 @@ Y.App.Content = AppContent;
 Y.Base.mix(Y.App, [AppContent]);
 
 
-}, '3.7.3', {"requires": ["app-base", "pjax-content"]});
+}, '3.8.1', {"requires": ["app-base", "pjax-content"]});

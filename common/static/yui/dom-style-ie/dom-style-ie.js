@@ -1,9 +1,4 @@
-/*
-YUI 3.7.3 (build 5687)
-Copyright 2012 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
+/* YUI 3.8.1 (build 5795) Copyright 2013 Yahoo! Inc. http://yuilibrary.com/license/ */
 YUI.add('dom-style-ie', function (Y, NAME) {
 
 (function(Y) {
@@ -306,4 +301,4 @@ if (!testFeature('style', 'computedStyle')) {
 })(Y);
 
 
-}, '3.7.3', {"requires": ["dom-style"]});
+}, '3.8.1', {"requires": ["dom-style"]});

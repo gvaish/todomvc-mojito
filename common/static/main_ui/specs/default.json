@@ -1,6 +1,6 @@
 {
     "base": "main_ui",
-    "instanceId": "yui_3_7_3_1_1360925166839_56",
+    "instanceId": "yui_3_8_1_1_1364449691789_54",
     "type": "HTMLFrameMojit",
     "config": {
         "deploy": true,
@@ -10,8 +10,6 @@
         }
     },
     "id": "main_ui",
-    "defaults": {},
-    "definition": {},
     "assets": {
         "favicon.ico": "/favicon.ico"
     },
@@ -21,10 +19,11 @@
     "partials": {},
     "views": {
         "index": {
-            "content-path": ".",
+            "content-path": "/static/HTMLFrameMojit/views/index.hb.html",
             "engine": "hb"
         }
     },
-    "acAddons": {},
-    "assetsRoot": "/static/HTMLFrameMojit/assets"
+    "assetsRoot": "/static/HTMLFrameMojit/assets",
+    "defaults": {},
+    "definition": {}
 }

@@ -1,9 +1,4 @@
-/*
-YUI 3.7.3 (build 5687)
-Copyright 2012 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
+/* YUI 3.8.1 (build 5795) Copyright 2013 Yahoo! Inc. http://yuilibrary.com/license/ */
 YUI.add('datatable-table', function (Y, NAME) {
 
 /**
@@ -422,7 +417,9 @@ Y.namespace('DataTable').TableView = Y.Base.create('table', Y.View, [], {
             }
         }
 
-        process(columns);
+        if (columns) {
+            process(columns);
+        }
 
         /**
         Array of the columns that correspond to those with value cells in the
@@ -757,4 +754,4 @@ Y.namespace('DataTable').TableView = Y.Base.create('table', Y.View, [], {
 
 
 
-}, '3.7.3', {"requires": ["datatable-core", "datatable-head", "datatable-body", "view", "classnamemanager"]});
+}, '3.8.1', {"requires": ["datatable-core", "datatable-head", "datatable-body", "view", "classnamemanager"]});

@@ -1,9 +1,7 @@
 {
     "type": "LazyLoad",
-    "instanceId": "yui_3_7_3_1_1360925166839_52",
+    "instanceId": "yui_3_8_1_1_1364449691789_52",
     "config": {},
-    "defaults": {},
-    "definition": {},
     "assets": {
         "favicon.ico": "/favicon.ico"
     },
@@ -22,8 +20,10 @@
     "controller": "LazyLoad",
     "acAddons": [
         "assets",
-        "params",
-        "composite"
+        "composite",
+        "params"
     ],
-    "assetsRoot": "/static/LazyLoad/assets"
+    "assetsRoot": "/static/LazyLoad/assets",
+    "defaults": {},
+    "definition": {}
 }

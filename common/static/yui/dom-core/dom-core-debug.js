@@ -1,9 +1,4 @@
-/*
-YUI 3.7.3 (build 5687)
-Copyright 2012 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
+/* YUI 3.8.1 (build 5795) Copyright 2013 Yahoo! Inc. http://yuilibrary.com/license/ */
 YUI.add('dom-core', function (Y, NAME) {
 
 var NODE_TYPE = 'nodeType',
@@ -392,4 +387,4 @@ Y_DOM = {
 Y.DOM = Y_DOM;
 
 
-}, '3.7.3', {"requires": ["oop", "features"]});
+}, '3.8.1', {"requires": ["oop", "features"]});

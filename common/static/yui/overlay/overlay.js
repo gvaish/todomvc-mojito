@@ -1,9 +1,4 @@
-/*
-YUI 3.7.3 (build 5687)
-Copyright 2012 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
+/* YUI 3.8.1 (build 5795) Copyright 2013 Yahoo! Inc. http://yuilibrary.com/license/ */
 YUI.add('overlay', function (Y, NAME) {
 
 /**
@@ -32,4 +27,14 @@ YUI.add('overlay', function (Y, NAME) {
 Y.Overlay = Y.Base.create("overlay", Y.Widget, [Y.WidgetStdMod, Y.WidgetPosition, Y.WidgetStack, Y.WidgetPositionAlign, Y.WidgetPositionConstrain]);
 
 
-}, '3.7.3', {"requires": ["widget", "widget-stdmod", "widget-position", "widget-position-align", "widget-stack", "widget-position-constrain"], "skinnable": true});
+}, '3.8.1', {
+    "requires": [
+        "widget",
+        "widget-stdmod",
+        "widget-position",
+        "widget-position-align",
+        "widget-stack",
+        "widget-position-constrain"
+    ],
+    "skinnable": true
+});

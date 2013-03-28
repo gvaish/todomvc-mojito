@@ -1,11 +1,7 @@
 {
     "type": "TunnelProxy",
-    "instanceId": "yui_3_7_3_1_1360925166839_57",
+    "instanceId": "yui_3_8_1_1_1364449691789_53",
     "config": {},
-    "defaults": {
-        "config": {}
-    },
-    "definition": {},
     "assets": {
         "favicon.ico": "/favicon.ico"
     },
@@ -14,6 +10,9 @@
     "models": {},
     "partials": {},
     "views": {},
-    "acAddons": {},
-    "assetsRoot": "/static/TunnelProxy/assets"
+    "assetsRoot": "/static/TunnelProxy/assets",
+    "defaults": {
+        "config": {}
+    },
+    "definition": {}
 }

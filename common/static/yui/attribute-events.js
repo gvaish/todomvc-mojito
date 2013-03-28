@@ -1,2 +1,2 @@
-var inst = require("../index").getInstance();
+var inst = require("./index").getInstance();
 module.exports = inst.use("attribute-events");

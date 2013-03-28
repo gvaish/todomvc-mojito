@@ -1,7 +1,2 @@
-/*
-YUI 3.7.3 (build 5687)
-Copyright 2012 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-YUI.add("scrollview",function(e,t){e.Base.plug(e.ScrollView,e.Plugin.ScrollViewScrollbars)},"3.7.3",{requires:["scrollview-base","scrollview-scrollbars"]});
+/* YUI 3.8.1 (build 5795) Copyright 2013 Yahoo! Inc. http://yuilibrary.com/license/ */
+YUI.add("scrollview",function(e,t){e.Base.plug(e.ScrollView,e.Plugin.ScrollViewScrollbars)},"3.8.1",{requires:["scrollview-base","scrollview-scrollbars"]});

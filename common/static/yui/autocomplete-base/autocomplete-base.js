@@ -1,9 +1,4 @@
-/*
-YUI 3.7.3 (build 5687)
-Copyright 2012 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
+/* YUI 3.8.1 (build 5795) Copyright 2013 Yahoo! Inc. http://yuilibrary.com/license/ */
 YUI.add('autocomplete-base', function (Y, NAME) {
 
 /**
@@ -1541,4 +1536,15 @@ AutoCompleteBase.UI_SRC = (Y.Widget && Y.Widget.UI_SRC) || 'ui';
 Y.AutoCompleteBase = AutoCompleteBase;
 
 
-}, '3.7.3', {"optional": ["autocomplete-sources"], "requires": ["array-extras", "base-build", "escape", "event-valuechange", "node-base"]});
+}, '3.8.1', {
+    "optional": [
+        "autocomplete-sources"
+    ],
+    "requires": [
+        "array-extras",
+        "base-build",
+        "escape",
+        "event-valuechange",
+        "node-base"
+    ]
+});

@@ -1,13 +1,8 @@
-/*
-YUI 3.7.3 (build 5687)
-Copyright 2012 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
+/* YUI 3.8.1 (build 5795) Copyright 2013 Yahoo! Inc. http://yuilibrary.com/license/ */
 YUI.add('anim-xy', function (Y, NAME) {
 
 /**
- * Adds support for the <code>xy</code> property in <code>from</code> and 
+ * Adds support for the <code>xy</code> property in <code>from</code> and
  * <code>to</code> attributes.
  * @module anim
  * @submodule anim-xy
@@ -29,4 +24,4 @@ Y.Anim.behaviors.xy = {
 
 
 
-}, '3.7.3', {"requires": ["anim-base", "node-screen"]});
+}, '3.8.1', {"requires": ["anim-base", "node-screen"]});

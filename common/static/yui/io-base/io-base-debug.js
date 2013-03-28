@@ -1,9 +1,4 @@
-/*
-YUI 3.7.3 (build 5687)
-Copyright 2012 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
+/* YUI 3.8.1 (build 5795) Copyright 2013 Yahoo! Inc. http://yuilibrary.com/license/ */
 YUI.add('io-base', function (Y, NAME) {
 
 /**
@@ -651,10 +646,15 @@ IO.prototype = {
         sync = config.sync;
         data = config.data;
 
-        // Serialize an map object into a key-value string using
+        // Serialize a map object into a key-value string using
         // querystring-stringify-simple.
         if ((Y.Lang.isObject(data) && !data.nodeType) && !transaction.upload) {
-            data = Y.QueryString.stringify(data);
+            if (Y.QueryString && Y.QueryString.stringify) {
+                Y.log('Stringifying config.data for request', 'info', 'io');
+                config.data = data = Y.QueryString.stringify(data);
+            } else {
+                Y.log('Failed to stringify config.data object, likely because `querystring-stringify-simple` is missing.', 'warn', 'io');
+            }
         }
 
         if (config.form) {
@@ -1006,4 +1006,4 @@ Y.mix(Y.IO.prototype, {
 
 
 
-}, '3.7.3', {"requires": ["event-custom-base", "querystring-stringify-simple"]});
+}, '3.8.1', {"requires": ["event-custom-base", "querystring-stringify-simple"]});

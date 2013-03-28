@@ -1,3 +1,3 @@
 var inst = require("../index").getInstance();
 inst.applyConfig({ debug: true, filter: "debug" });
-module.exports = inst.use("attribute-events");
+module.exports = inst.use("base-observable");

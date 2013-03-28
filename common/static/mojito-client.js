@@ -218,6 +218,7 @@ YUI.add('mojito-client', function(Y, NAME) {
      *     server to start up mojito.
      */
     function MojitoClient(config) {
+        this.page = {};
         this.timeLogStack = [];
         this.yuiConsole = null;
         this._pauseQueue = [];
@@ -330,12 +331,23 @@ YUI.add('mojito-client', function(Y, NAME) {
     MojitoClient.prototype = {
 
         init: function(config) {
-            fireLifecycle('pre-init', {config: config});
+            var that = this,
+                appConfig = config.appConfig,
+                forwardConfig = {
+                    config: config,
+                    // pass globalHookhandler to addons that may want to use hooks
+                    globalHookHandler: globalHookHandler
+                };
+            fireLifecycle('pre-init', forwardConfig);
+            // if we didn't originaly have hooks enabled, copy back from config object.
+            // This is the case where an add-on module wants to turn on hooks and
+            // created an instance of the globalHookHandler.
+            if (!globalHookHandler) {
+                globalHookHandler = forwardConfig.globalHookHandler;
+            }
             // HookSystem::StartBlock
             Y.mojito.hooks.hook('mojitoClient', globalHookHandler, 'start', this);
             // HookSystem::EndBlock
-            var that = this,
-                appConfig = config.appConfig;
 
             // YUI Console
             if (appConfig && appConfig.yui &&

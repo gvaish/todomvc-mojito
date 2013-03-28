@@ -1,9 +1,4 @@
-/*
-YUI 3.7.3 (build 5687)
-Copyright 2012 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
+/* YUI 3.8.1 (build 5795) Copyright 2013 Yahoo! Inc. http://yuilibrary.com/license/ */
 YUI.add('loader-base', function (Y, NAME) {
 
 /**
@@ -19,7 +14,7 @@ if (!YUI.Env[Y.version]) {
             BUILD = '/build/',
             ROOT = VERSION + BUILD,
             CDN_BASE = Y.Env.base,
-            GALLERY_VERSION = 'gallery-2012.10.10-19-59',
+            GALLERY_VERSION = 'gallery-2013.01.16-21-05',
             TNT = '2in3',
             TNT_VERSION = '4',
             YUI2_VERSION = '2.9.0',
@@ -2773,4 +2768,4 @@ Y.Loader.prototype = {
 
 
 
-}, '3.7.3', {"requires": ["get", "features"]});
+}, '3.8.1', {"requires": ["get", "features"]});

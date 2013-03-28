@@ -1,9 +1,4 @@
-/*
-YUI 3.7.3 (build 5687)
-Copyright 2012 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
+/* YUI 3.8.1 (build 5795) Copyright 2013 Yahoo! Inc. http://yuilibrary.com/license/ */
 YUI.add('text-accentfold', function (Y, NAME) {
 
 /**
@@ -165,4 +160,4 @@ AccentFold = {
 Text.AccentFold = AccentFold;
 
 
-}, '3.7.3', {"requires": ["array-extras", "text-data-accentfold"]});
+}, '3.8.1', {"requires": ["array-extras", "text-data-accentfold"]});
