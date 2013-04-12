@@ -48,7 +48,7 @@ YUI.add('TodoMojit', function(Y, NAME) {
 							if(err) {
 								ac.error(err);
 							} else {
-								ac.done({ "items": items.reverse(), "count": items.length }, 'items');
+								ac.done({ "items": items.reverse() }, 'items');
 							}
 						});
 					}
@@ -135,4 +135,6 @@ YUI.add('TodoMojit', function(Y, NAME) {
 		}
 	};
 
-}, '0.0.1', {requires: ['mojito', 'TodoMojitModelTodo', 'mojito-models-addon',  'json', 'mojito-assets-addon', 'mojito-params-addon']});
+}, '0.0.1', {requires: ['mojito', 'TodoMojitModelTodo',
+ 'mojito-models-addon',  'json',
+ 'mojito-assets-addon', 'mojito-params-addon']});

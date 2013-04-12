@@ -14,8 +14,7 @@
 		"appPort": 6789,
 		"staticHandling": {
 			"appName": "todomvc",
-			"useRollups": false,
-			"//prefix": "./static"
+			"useRollups": false
 		},
 		"log": {
 			"server": {
