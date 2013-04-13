@@ -137,8 +137,12 @@ YUI.add('TodoMojitModelTodo', function(Y, NAME) {
 		},
 
 		update: function(item, callback) {
+			if(!item) {
+				callback('Missing item to update');
+				return;
+			}
 			if(!item.id) {
-				callback('Missing id to retrieve');
+				callback('Missing id to update');
 				return;
 			}
 			if(storage) {

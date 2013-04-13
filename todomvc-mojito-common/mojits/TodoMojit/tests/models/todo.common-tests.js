@@ -53,6 +53,20 @@ YUI.add('TodoMojitModelTodo-tests', function(Y, NAME) {
 			});
 		},
 
+		'test update-no-item': function() {
+			todo.update(null, function(err, item) {
+				A.isNotNull(err);
+				A.isUndefined(item);
+			});
+		},
+
+		'test update-empty-id': function() {
+			todo.update({}, function(err, item) {
+				A.isNotNull(err);
+				A.isUndefined(item);
+			});
+		},
+
 		'test get': function() {
 			todo.getAll(function(err, items) {
 				var id;
@@ -65,6 +79,13 @@ YUI.add('TodoMojitModelTodo-tests', function(Y, NAME) {
 					A.isNotNull(item);
 					A.areEqual(id, item.id);
 				});
+			});
+		},
+
+		'test get-empty-id': function() {
+			todo.get(null, function(err, item) {
+				A.isNotNull(err);
+				A.isUndefined(item);
 			});
 		},
 
@@ -156,7 +177,27 @@ YUI.add('TodoMojitModelTodo-tests', function(Y, NAME) {
 		},
 
 		'test toggle': function() {
-			
+			todo.getAll(function(err, items) {
+				var id = items[0].id,
+					completed = !!items[0].completed;
+
+				todo.toggle(id, function(err, item) {
+					A.areEqual(!completed, item.completed);
+				});
+			});
+		},
+
+		'test toggle-double': function() {
+			todo.getAll(function(err, items) {
+				var id = items[0].id,
+					completed = !!items[0].completed;
+
+				todo.toggle(id, function(err, item) {
+					todo.toggle(item.id, function(err, ritem) {
+						A.areEqual(completed, ritem.completed);
+					});
+				});
+			});
 		}
 	}));
 
