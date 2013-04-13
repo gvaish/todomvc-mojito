@@ -5,7 +5,7 @@ YUI.add('TodoMojitModelTodo', function(Y, NAME) {
 
 	Y.namespace('mojito.models').Todo = {
 		init: function(config) {
-			Y.log('Initializing... ', 'warn', NAME);
+			Y.log('Initializing... ', 'info', NAME);
 			this.config = config;
 
 			var initData = storage.retrieve('todo');
@@ -47,7 +47,7 @@ YUI.add('TodoMojitModelTodo', function(Y, NAME) {
 		add: function(item, callback) {
 			if(storage) {
 				item.id = Y.guid();
-				item.complete = false;
+				item.completed = !!item.completed;
 				var all = storage.retrieve('todo').response;
 				all.push(item);
 				storage.add('todo', all);
@@ -98,7 +98,7 @@ YUI.add('TodoMojitModelTodo', function(Y, NAME) {
 					item.completed = !!completed;
 				});
 				storage.add('todo', all);
-				callback(null, 'updated');
+				callback(null, all);
 			} else {
 				callback('Storage not initialized');
 			}
@@ -137,8 +137,12 @@ YUI.add('TodoMojitModelTodo', function(Y, NAME) {
 		},
 
 		update: function(item, callback) {
+			if(!item) {
+				callback('Missing item to update');
+				return;
+			}
 			if(!item.id) {
-				callback('Missing id to retrieve');
+				callback('Missing id to update');
 				return;
 			}
 			if(storage) {
