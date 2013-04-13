@@ -24,10 +24,7 @@ YUI.add('TodoMojitBinderIndex-tests', function(Y, NAME) {
                 _guid: 'guid123'
             });
             binder.bind(node);
-
-            // there is nothing to test in the binder initially
             A.skip();
-
         }
 
     }));
