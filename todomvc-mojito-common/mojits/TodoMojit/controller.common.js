@@ -5,10 +5,98 @@ YUI.add('TodoMojit', function(Y, NAME) {
 	Y.namespace('mojito.controllers')[NAME] = {
 
 		index: function(ac) {
-			ac.assets.addBlob('<meta charset="utf-8">\n<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">', 'top');
-			ac.assets.addBlob('<link href="/static/' + ac.type + '/assets/base.css" rel="stylesheet" type="text/css" />', 'top');
+			ac.assets.addCss('./base.css');
 			ac.assets.addBlob('<!--[if IE]>\n<script src="/static/' + ac.type + '/assets/ie.js"></script>\n<![endif]-->', 'top');
 			ac.done({});
+		},
+
+		'getAll': function(ac) {
+			Y.log('getAll called', 'warn', NAME);
+			var todo = ac.models.get('Todo');
+			todo.getAll(function(err, items) {
+				//Y.log('getAll => ' + Y.JSON.stringify(items), 'warn', NAME);
+				if(err) {
+					ac.error(err);
+				} else {
+					ac.done({ "items": items.reverse() }, 'items');
+				}
+			});
+		},
+
+		'getCompleted': function(ac) {
+			
+		},
+
+		'getIncomplete': function(ac) {
+			
+		},
+
+		'getById': function(ac) {
+			
+		},
+
+		'add': function(ac) {
+			var data = ac.params.getFromBody('data'),
+			todo = ac.models.get('Todo');
+
+			data = Y.JSON.parse(data);
+			todo.add(data, function(err, items) {
+				if(err) {
+					ac.error(err);
+				} else {
+					ac.done({ "items": items.reverse(), "count": items.length }, 'items');
+				}
+			});
+		},
+
+		'delete': function(ac) {
+			var data = ac.params.getFromBody('data'),
+			todo = ac.models.get('Todo');
+
+			todo.remove(data, function(err, item) {
+				if(err) {
+					ac.error(err);
+				} else {
+					ac.done('success');
+				}
+			});
+		},
+
+		'update': function(ac) {
+			Y.log('update a Todo', 'warn', NAME);
+			var data = ac.params.getFromBody('data'),
+			todo = ac.models.get('Todo');
+
+			data = Y.JSON.parse(data);
+			if(!data.title) {
+				todo.remove(data.id, function(err, item) {
+					if(err) {
+						ac.error(err);
+					} else {
+						ac.done('success');
+					}
+				});
+			} else {
+				todo.update(data, function(err, item) {
+					if(err) {
+						ac.error(err);
+					} else {
+						ac.done(item, 'item');
+					}
+				});
+			}
+		},
+
+		'clear': function(ac) {
+			
+		},
+
+		batchMark: function(ac) {
+			
+		},
+
+		'toggle': function(ac) {
+			
 		},
 
 		operate: function(ac) {
@@ -43,54 +131,11 @@ YUI.add('TodoMojit', function(Y, NAME) {
 								break;
 						}
 					} else {
-						todo.getAll(function(err, items) {
-							//Y.log('getAll => ' + Y.JSON.stringify(items), 'warn', NAME);
-							if(err) {
-								ac.error(err);
-							} else {
-								ac.done({ "items": items.reverse() }, 'items');
-							}
-						});
+						
 					}
-					break;
-				case 'add':
-					data = Y.JSON.parse(data);
-					todo.add(data, function(err, items) {
-						if(err) {
-							ac.error(err);
-						} else {
-							ac.done({ "items": items.reverse(), "count": items.length }, 'items');
-						}
-					});
-					break;
-				case 'delete':
-					todo.remove(data, function(err, item) {
-						if(err) {
-							ac.error(err);
-						} else {
-							ac.done('success');
-						}
-					});
 					break;
 				case 'update':
-					data = Y.JSON.parse(data);
-					if(!data.title) {
-						todo.remove(data.id, function(err, item) {
-							if(err) {
-								ac.error(err);
-							} else {
-								ac.done('success');
-							}
-						});
-					} else {
-						todo.update(data, function(err, item) {
-							if(err) {
-								ac.error(err);
-							} else {
-								ac.done(item, 'item');
-							}
-						});
-					}
+					
 					break;
 				case 'clear':
 					if(data) {
