@@ -16,7 +16,7 @@ YUI.add('TodoMojit', function(Y, NAME) {
 				if(err) {
 					ac.error(err);
 				} else {
-					ac.done({ "items": items.reverse() }, 'items');
+					ac.done({ "items": items }, 'items');
 				}
 			});
 		},
@@ -28,7 +28,7 @@ YUI.add('TodoMojit', function(Y, NAME) {
 				if(err) {
 					ac.error(err);
 				} else {
-					ac.done({ "items": items.reverse(), "count": items.length }, 'items');
+					ac.done({ "items": items, "count": items.length }, 'items');
 				}
 			});
 		},
@@ -40,7 +40,7 @@ YUI.add('TodoMojit', function(Y, NAME) {
 				if(err) {
 					ac.error(err);
 				} else {
-					ac.done({ "items": items.reverse(), "count": items.length }, 'items');
+					ac.done({ "items": items, "count": items.length }, 'items');
 				}
 			});
 		},
@@ -67,7 +67,7 @@ YUI.add('TodoMojit', function(Y, NAME) {
 				if(err) {
 					ac.error(err);
 				} else {
-					ac.done({ "items": items.reverse(), "count": items.length }, 'items');
+					ac.done({ "items": items, "count": items.length }, 'items');
 				}
 			});
 		},
