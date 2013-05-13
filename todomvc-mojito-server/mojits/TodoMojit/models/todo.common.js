@@ -15,8 +15,6 @@ YUI.add('TodoMojitModelTodo', function(Y, NAME) {
 
 		getAll: function(callback) {
 			if(storage) {
-				//var rv = storage.getItem('todo', true);
-				//Y.log(' rv: ' + Y.JSON.stringify(rv), 'warn', NAME);
 				var obj = storage.retrieve('todo'),
 					rv = obj.response;
 				callback(null, rv);
@@ -46,9 +44,9 @@ YUI.add('TodoMojitModelTodo', function(Y, NAME) {
 		add: function(item, callback) {
 			if(storage) {
 				item.id = Y.guid();
-				item.complete = false;
+				item.completed = !!item.completed;
 				var all = storage.retrieve('todo').response;
-				all.push(item);
+				all.unshift(item);
 				storage.add('todo', all);
 				callback(null, all);
 			} else {
@@ -97,7 +95,7 @@ YUI.add('TodoMojitModelTodo', function(Y, NAME) {
 					item.completed = !!completed;
 				});
 				storage.add('todo', all);
-				callback(null, 'updated');
+				callback(null, all);
 			} else {
 				callback('Storage not initialized');
 			}
@@ -136,8 +134,12 @@ YUI.add('TodoMojitModelTodo', function(Y, NAME) {
 		},
 
 		update: function(item, callback) {
+			if(!item) {
+				callback('Missing item to update');
+				return;
+			}
 			if(!item.id) {
-				callback('Missing id to retrieve');
+				callback('Missing id to update');
 				return;
 			}
 			if(storage) {
