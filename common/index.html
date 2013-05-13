@@ -9,12 +9,12 @@
 
 <title>Yahoo! Mojito • TodoMVC</title>
 
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<link href="static/TodoMojit/assets/base.css" rel="stylesheet" type="text/css" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <!--[if IE]>
 <script src="static/TodoMojit/assets/ie.js"></script>
 <![endif]-->
+<link rel="stylesheet" type="text/css" href="static/TodoMojit/assets/base.css"/>
 <script type="text/javascript" src="http://yui.yahooapis.com/3.8.1/yui-base/yui-base-min.js"></script>
 <script type="text/javascript" src="http://yui.yahooapis.com/3.8.1/loader-base/loader-base-min.js"></script>
 <script type="text/javascript" src="http://yui.yahooapis.com/3.8.1/loader-yui3/loader-yui3-min.js"></script>
@@ -25,7 +25,7 @@
 </head>
 <body>
 
-<div id="yui_3_8_1_1_1365879797044_14">
+<div id="yui_3_8_1_1_1368422805840_14">
     <section id="todoapp">
 		<header id="header">
 			<h1>todos</h1>
@@ -40,7 +40,7 @@
 	<div id="info">
 		<p>Double-click to edit a todo</p>
         <p>Created by
-          <a href="https://github.com/gvaish">Gaurav Vaish</a>
+          <a href="https://github.com/gvaish">Gaurav</a> <a href="http://www.m10v.com">Vaish</a>
         </p>
 		<p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
 	</div>
@@ -48,9 +48,9 @@
 
 
 <script type="text/javascript">
-    YUI.applyConfig({"base":"http://yui.yahooapis.com/3.8.1/","comboBase":"http://yui.yahooapis.com/combo?","comboSep":"&","root":"3.8.1/","fetchCSS":true,"combine":false,"logLevelOrder":["debug","mojito","info","warn","error","none"],"lang":"en","groups":{"app":{"combine":false,"maxURLLength":1024,"base":"static/","comboBase":"/combo~","comboSep":"~","root":"static/"}}});
+    YUI.applyConfig({"base":"http://yui.yahooapis.com/3.8.1/","comboBase":"http://yui.yahooapis.com/combo?","comboSep":"&","root":"3.8.1/","fetchCSS":true,"combine":false,"debug":true,"logLevel":"info","logLevelOrder":["debug","mojito","info","warn","error","none"],"lang":"en","groups":{"app":{"combine":false,"maxURLLength":1024,"base":"static/","comboBase":"/combo~","comboSep":"~","root":"static/"}}});
     YUI().use('mojito-client','TodoMojitBinderIndex', function(Y) {
-    window.YMojito = { client: new Y.mojito.Client({"context":{"runtime":"client","site":"","device":"","lang":"en","langs":"en,en","region":"","jurisdiction":"","bucket":"","flavor":"","tz":""},"binderMap":{"yui_3_8_1_1_1365879797044_14":{"name":"TodoMojitBinderIndex","action":"index","config":{},"type":"TodoMojit","viewId":"yui_3_8_1_1_1365879797044_14","instanceId":"yui_3_8_1_1_1365879796179_49"}},"appConfig":{"specs":{"main_ui":{"type":"HTMLFrameMojit","config":{"deploy":true,"title":"Yahoo! Mojito • TodoMVC","child":{"type":"TodoMojit"}}},"tunnelProxy":{"type":"TunnelProxy"}},"appPort":6789,"staticHandling":{"appName":"todomvc","useRollups":false,"prefix":"static"},"log":{"server":{"yui":false,"level":"warn"},"client":{"yui":false,"level":"warn"}},"yui":{},"builds":{"html5app":{"forceRelativePaths":true,"attachManifest":false}},"actionTimeout":60000,"mojitsDirs":["mojits"],"routesFiles":["routes.json"],"tunnelPrefix":"/tunnel","viewEngine":null},"routes":{"root":{"path":"/","verbs":{"GET":true},"call":"main_ui.index","name":"root","params":{},"regex":{},"query":{},"requires":{},"ext_match":"^/$","int_match":"^$"}}}) };
+    window.YMojito = { client: new Y.mojito.Client({"context":{"runtime":"client","site":"","device":"","lang":"en","langs":"en,en","region":"","jurisdiction":"","bucket":"","flavor":"","tz":""},"binderMap":{"yui_3_8_1_1_1368422805840_14":{"name":"TodoMojitBinderIndex","action":"index","config":{},"type":"TodoMojit","viewId":"yui_3_8_1_1_1368422805840_14","instanceId":"yui_3_8_1_1_1368422804894_49"}},"appConfig":{"specs":{"main_ui":{"type":"HTMLFrameMojit","config":{"deploy":true,"title":"Yahoo! Mojito • TodoMVC","child":{"type":"TodoMojit"},"assets":{"top":{"blob":["\\u003Cmeta charset=\\u0027utf-8\\u0027\\u003E","\\u003Cmeta http-equiv=\\u0027X-UA-Compatible\\u0027 content=\\u0027IE=edge,chrome=1\\u0027\\u003E"]}}}},"tunnelProxy":{"type":"TunnelProxy"}},"appPort":6789,"staticHandling":{"appName":"todomvc","prefix":"static"},"yui":{},"builds":{"html5app":{"forceRelativePaths":true,"attachManifest":false}},"actionTimeout":60000,"mojitsDirs":["mojits"],"routesFiles":["routes.json"],"tunnelPrefix":"/tunnel","viewEngine":null},"routes":{"root":{"path":"/","verbs":{"GET":true},"call":"main_ui.index","name":"root","params":{},"regex":{},"query":{},"requires":{},"ext_match":"^/$","int_match":"^$"}}}) };
         });
 </script>
 
