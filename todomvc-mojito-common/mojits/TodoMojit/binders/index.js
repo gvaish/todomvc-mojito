@@ -22,7 +22,6 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 
 		resync: function() {
 			var self = this;
-			//Y.log('resync called', 'warn', NAME);
 			self.mp.invoke('getAll',  function(err, response) {
 				if(!err) {
 					self.listNode.set('innerHTML', '');
@@ -41,7 +40,6 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 				allSel = true,
 				i;
 
-			//Y.log('Size: ' + size, 'warn', NAME);
 			for(i = 0; i < size; i++) {
 				if(!toggles.item(i).get('checked')) {
 					allSel = false;
@@ -85,7 +83,7 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 		},
 
 		batchMark: function() {
-			var allCompleted = this.toggleAll.get('checked'),
+			var allCompleted = !!this.toggleAll.get('checked'),
 				self = this;
 
 			this.listNode.all('li').each(function(liNode) {
@@ -93,9 +91,9 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 				liNode.one('.toggle').set('checked', allCompleted);
 			});
 
-			this.mp.invoke('operate', {
+			this.mp.invoke('batchMark', {
 				'params': {
-					'body': { 'op': 'batchMark', 'data': allCompleted }
+					'body': { 'complete': allCompleted }
 				}
 			}, function(err, response) {
 				if(err) {
@@ -113,13 +111,12 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 				id = li.get('id'),
 				self = this;
 
-			this.mp.invoke('operate', { 'params': {
-				'body': { 'op': 'toggle', 'data': id }
+			this.mp.invoke('toggle', { 'params': {
+				'body': { 'id': id }
 			}}, function(err, response) {
 				if(err) {
 					Y.log('Error: ' + err, 'warn', NAME);
 				} else {
-					//li[complete ? 'addClass' : 'removeClass']('completed');
 					self.resync();
 				}
 			});
@@ -173,12 +170,11 @@ YUI.add('TodoMojitBinderIndex', function(Y, NAME) {
 				self = this;
 
 			this.mp.invoke('delete', { 'params':
-				{ 'body': { 'data': itemId }}
+				{ 'body': { 'id': itemId }}
 			}, function(err, response) {
 				if(err) {
 					Y.log('Error while deleting: ' + err, 'warn', NAME);
 				} else {
-					//li.get('parentNode').removeChild(li);
 					self.resync();
 				}
 			});
